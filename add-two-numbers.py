@@ -11,35 +11,38 @@ class Solution(object):
         :rtype: Optional[ListNode]
         """
 
-        
-        l1Pointer = l1
-        l2Pointer = l2
+        # create two nodes, one a pointer, one the head. Return the NEXT value of the head, but first set the next value of the head to NONE
+        tempHead = ListNode(0)
+        tail = tempHead
+        carry = 0
 
-        totalSum = 0
-        currentMultiplier = 1
-
-        # sum the two values
-        while l1Pointer:
-            totalSum += l1Pointer.val * currentMultiplier
-            currentMultiplier *= 10
-            l1Pointer = l1Pointer.next
-        
-        currentMultiplier = 1
-        while l2Pointer:
-            totalSum += l2Pointer.val * currentMultiplier
-            currentMultiplier *= 10
-            l2Pointer = l2Pointer.next
+        while l1 is not None or l2 is not None or carry != 0:
+            # better syntax for setting the value of something
+            digit1 = l1.val if l1 is not None else 0
+            digit2 = l2.val if l2 is not None else 0
             
 
-        pointer = ListNode()
-        head = pointer
-        if totalSum == 0:
-            return head
-        currentRemainder = totalSum
+            sum = digit1 + digit2 + carry
+            digit = sum % 10 
+            carry = sum // 10
 
-        while currentRemainder != 0:
-            pointer.next = ListNode(currentRemainder % 10)
-            currentRemainder = currentRemainder // 10
-            pointer = pointer.next
+            # create new node
+            newNode = ListNode(digit)
 
-        return head.next
+            # set the pointer next to new node
+            tail.next = newNode
+
+            # advance pointer
+            tail = tail.next
+
+            l1 = l1.next if l1 is not None else None
+            l2 = l2.next if l2 is not None else None
+        
+        result = tempHead.next
+
+        # remove the temp head with node value of 0
+        tempHead.next = None
+        return result
+            
+
+            
