@@ -1,3 +1,8 @@
+# Essentially, iterate through both linked lists, while adding the current digit
+# loop will iterate until the end of the largest linked list, but also if there is a carry over value
+# the carry over value is defined before hand, and is a condition for the while loop
+# was caught up on defining the linked list, i now know that you can set a head, and a pointer for traversal.
+
 # Definition for singly-linked list.
 # class ListNode(object):
 #     def __init__(self, val=0, next=None):
